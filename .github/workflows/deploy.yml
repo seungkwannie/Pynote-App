@@ -18,6 +18,17 @@ jobs:
       run: docker build -t pynote-app .
 
     - name: Test Docker Run
-      # We use 'python --version' because it starts the container,
-      # proves it works, and exits immediately.
-      run: docker run pynote-app python --version
+      run: |
+        # Run the container in the background (-d)
+        docker run -d --name test-app pynote-app
+        # Wait 10 seconds for it to boot up
+        sleep 10
+        # Check if the container is still running (if it crashed, this fails)
+        if [ "$(docker inspect -f '{{.State.Running}}' test-app)" == "true" ]; then
+          echo "Streamlit started successfully!"
+          docker stop test-app
+        else
+          echo "Streamlit failed to start!"
+          docker logs test-app
+          exit 1
+        fi
