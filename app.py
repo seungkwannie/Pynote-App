@@ -23,10 +23,8 @@ with st.sidebar:
         for i, note in enumerate(st.session_state.notes):
             # Show a snippet of the note as a button/label
             st.info(f"**{note['title']}**\n\n{note['date']}")
-
-    for note in reversed(st.sidebar):
-        with st.expander(f"{note['title']} - {note['date']}"):
-            st.write(note['content'])
+            if st.button(f"View Note {i+1}"):
+                st.session_state.selected_note = note
 
 # --- MAIN INTERFACE: CREATE NOTE ---
 with st.container():
@@ -43,7 +41,6 @@ with st.container():
                     "date": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
                 }
                 st.session_state.notes.append(new_note)
-                st.sidebar.append(new_note)
                 st.success("Note saved successfully!")
             else:
                 st.error("Please provide both a title and content.")
