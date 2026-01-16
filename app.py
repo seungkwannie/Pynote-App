@@ -16,6 +16,7 @@ if "notes" not in st.session_state:
 # --- SIDEBAR: VIEW SAVED NOTES ---
 with st.sidebar:
     st.header("My Notes")
+    st.text_input("Search Notes", key="search_query", placeholder="Type to search...")
     if not st.session_state.notes:
         st.write("No notes saved yet.")
     else:
