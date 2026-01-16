@@ -43,6 +43,7 @@ with st.container():
                     "date": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
                 }
                 st.session_state.notes.append(new_note)
+                st.sidebar.append(new_note)
                 st.success("Note saved successfully!")
             else:
                 st.error("Please provide both a title and content.")
@@ -55,3 +56,7 @@ if st.session_state.notes:
     for note in reversed(st.session_state.notes):
         with st.expander(f"{note['title']} - {note['date']}"):
             st.write(note['content'])
+
+# git add app.py
+# git commit -m "fixed notes"
+# git push origin main
