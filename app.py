@@ -34,8 +34,8 @@ with st.sidebar:
                 # Divider
                 st.divider()
 
-            else:
-                st.session_state.selected_note = note
+                if st.button(f"View Note {i + 1}"):
+                    st.session_state.selected_note = note
 
 
 # --- MAIN INTERFACE: CREATE NOTE ---
