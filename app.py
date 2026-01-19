@@ -35,7 +35,7 @@ with st.sidebar:
                 st.divider()
 
             else:
-                st.divider()
+                st.session_state.selected_note = note
 
 
 # --- MAIN INTERFACE: CREATE NOTE ---
