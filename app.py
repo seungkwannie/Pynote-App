@@ -34,6 +34,9 @@ with st.sidebar:
                 # Divider
                 st.divider()
 
+            else:
+                st.write("")
+
 
 # --- MAIN INTERFACE: CREATE NOTE ---
 with st.container():
