@@ -16,33 +16,15 @@ if "notes" not in st.session_state:
 # --- SIDEBAR: VIEW SAVED NOTES ---
 with st.sidebar:
     st.header("My Notes")
-
-    # Add a "New Note" button at the top
-    if st.button("+ New Note"):
-        st.session_state.selected_note = {"title": "New Note", "content": "",
-                                          "date": datetime.now().strftime("%Y-%m-%d")}
-
-    st.divider()
-
+    st.text_input("Search Notes", key="search_query", placeholder="Type to search...")
     if not st.session_state.notes:
-        st.info("No notes saved yet.")
+        st.write("No notes saved yet.")
     else:
         for i, note in enumerate(st.session_state.notes):
-            # Use a unique key for every button to avoid conflicts
-            if st.button(f"📝 {note['title']}", key=f"note_{i}", use_container_width=True):
+            # Show a snippet of the note as a button/label
+            st.info(f"**{note['title']}**\n\n{note['date']}")
+            if st.button(f"View Note {i+1}"):
                 st.session_state.selected_note = note
-
-# with st.sidebar:
-#     st.header("My Notes")
-#     st.text_input("Search Notes", key="search_query", placeholder="Type to search...")
-#     if not st.session_state.notes:
-#         st.write("No notes saved yet.")
-#     else:
-#         for i, note in enumerate(st.session_state.notes):
-#             # Show a snippet of the note as a button/label
-#             st.info(f"**{note['title']}**\n\n{note['date']}")
-#             if st.button(f"View Note {i+1}"):
-#                 st.session_state.selected_note = note
 
 
 
